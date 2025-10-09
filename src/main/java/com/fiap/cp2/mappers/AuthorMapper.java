@@ -1,5 +1,6 @@
 package com.fiap.cp2.mappers;
 
+import com.fiap.cp2.dto.AuthorInDto;
 import com.fiap.cp2.dto.AuthorOutDto;
 import com.fiap.cp2.entities.Author;
 
@@ -13,6 +14,13 @@ public final class AuthorMapper {
                 author.getId(),
                 author.getNome(),
                 author.getEmail()
+        );
+    }
+
+    public static Author toEntity(AuthorInDto authorInDto) {
+        return new Author(
+                authorInDto.name(),
+                authorInDto.email()
         );
     }
 }

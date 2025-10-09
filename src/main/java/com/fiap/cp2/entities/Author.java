@@ -19,4 +19,12 @@ public class Author {
 
     private String email;
 
+    public Author(String name, String email) {
+        this.nome = name;
+        this.email = email;
+    }
+
+    public Author() {
+
+    }
 }
