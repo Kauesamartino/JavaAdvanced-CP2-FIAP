@@ -8,4 +8,6 @@ public interface AuthorService {
     Page<Author> findAll(Pageable pageable);
 
     Author saveOrUpdate(Author author);
+
+    Author findById(Long id);
 }

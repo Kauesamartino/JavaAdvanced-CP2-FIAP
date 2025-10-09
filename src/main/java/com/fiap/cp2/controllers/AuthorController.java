@@ -37,4 +37,10 @@ public class AuthorController {
         final Author author = this.authorService.saveOrUpdate(AuthorMapper.toEntity(authorInDto));
         return ResponseEntity.ok(AuthorMapper.toOutDto(author));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AuthorOutDto> findById(@PathVariable Long id) {
+        final Author author = this.authorService.findById(id);
+        return ResponseEntity.ok(AuthorMapper.toOutDto(author));
+    }
 }
