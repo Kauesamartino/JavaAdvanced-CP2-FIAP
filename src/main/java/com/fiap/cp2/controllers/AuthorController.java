@@ -1,8 +1,10 @@
 package com.fiap.cp2.controllers;
 
+import com.fiap.cp2.dto.AuthorBooksOutDto;
 import com.fiap.cp2.dto.AuthorInDto;
 import com.fiap.cp2.dto.AuthorOutDto;
 import com.fiap.cp2.entities.Author;
+import com.fiap.cp2.entities.Book;
 import com.fiap.cp2.mappers.AuthorMapper;
 import com.fiap.cp2.services.AuthorService;
 import org.springframework.data.domain.Page;
@@ -33,15 +35,23 @@ public class AuthorController {
         return ResponseEntity.ok(new PageImpl<>(dto, authors.getPageable(), authors.getTotalElements()));
     }
 
-    @PostMapping
-    public ResponseEntity<AuthorOutDto> create(@Validated @RequestBody AuthorInDto authorInDto) {
-        final Author author = this.authorService.saveOrUpdate(AuthorMapper.toEntity(authorInDto));
-        return ResponseEntity.ok(AuthorMapper.toOutDto(author));
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<AuthorOutDto> findById(@PathVariable Long id) {
         final Author author = this.authorService.findById(id);
+        return ResponseEntity.ok(AuthorMapper.toOutDto(author));
+    }
+
+    @GetMapping("/{id}/books")
+    public ResponseEntity<AuthorBooksOutDto> findAuthorWithBooksById(@PathVariable Long id) {
+        final Author author = this.authorService.findById(id);
+        final List<Book> books = this.authorService.findByIdBooks(id);
+        return ResponseEntity.ok(AuthorMapper.toAuthorBooksOutDto(author, books));
+    }
+
+    @PostMapping
+    public ResponseEntity<AuthorOutDto> create(@Validated @RequestBody AuthorInDto authorInDto) {
+        final Author author = this.authorService.saveOrUpdate(AuthorMapper.toEntity(authorInDto));
         return ResponseEntity.ok(AuthorMapper.toOutDto(author));
     }
 

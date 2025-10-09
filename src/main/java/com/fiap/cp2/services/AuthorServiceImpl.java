@@ -1,20 +1,26 @@
 package com.fiap.cp2.services;
 
 import com.fiap.cp2.entities.Author;
+import com.fiap.cp2.entities.Book;
 import com.fiap.cp2.exceptions.EntityNotFound;
 import com.fiap.cp2.repositories.AuthorRepository;
+import com.fiap.cp2.repositories.BookRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
+    private final BookRepository bookRepository;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository) {
+    public AuthorServiceImpl(AuthorRepository authorRepository, BookRepository bookRepository) {
         this.authorRepository = authorRepository;
+        this.bookRepository = bookRepository;
     }
 
     @Override
@@ -36,5 +42,10 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void deleteById(Long id) {
         this.authorRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Book> findByIdBooks(Long id) {
+        return this.bookRepository.findBooksByAuthorId(id);
     }
 }
