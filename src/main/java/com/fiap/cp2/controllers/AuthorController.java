@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class AuthorController {
     }
 
     @PostMapping
-    public ResponseEntity<AuthorOutDto> create(@RequestBody AuthorInDto authorInDto) {
+    public ResponseEntity<AuthorOutDto> create(@Validated @RequestBody AuthorInDto authorInDto) {
         final Author author = this.authorService.saveOrUpdate(AuthorMapper.toEntity(authorInDto));
         return ResponseEntity.ok(AuthorMapper.toOutDto(author));
     }
