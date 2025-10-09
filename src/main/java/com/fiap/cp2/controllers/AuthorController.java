@@ -30,7 +30,7 @@ public class AuthorController {
                                                       @RequestParam(required = false, defaultValue = "10") Integer size) {
         final Page<Author> authors = this.authorService.findAll(PageRequest.of(page, size));
         final List<AuthorOutDto> dto = authors.stream()
-                .map(author -> AuthorMapper.toOutDto(author)).toList();
+                .map(AuthorMapper::toOutDto).toList();
         return ResponseEntity.ok(new PageImpl<>(dto, authors.getPageable(), authors.getTotalElements()));
     }
 }
