@@ -10,4 +10,6 @@ public interface AuthorService {
     Author saveOrUpdate(Author author);
 
     Author findById(Long id);
+
+    void deleteById(Long id);
 }

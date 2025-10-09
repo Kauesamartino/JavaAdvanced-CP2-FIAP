@@ -32,4 +32,9 @@ public class AuthorServiceImpl implements AuthorService {
     public Author findById(Long id) {
         return this.authorRepository.findById(id).orElseThrow(() -> new EntityNotFound("Page not found"));
     }
+
+    @Override
+    public void deleteById(Long id) {
+        this.authorRepository.deleteById(id);
+    }
 }

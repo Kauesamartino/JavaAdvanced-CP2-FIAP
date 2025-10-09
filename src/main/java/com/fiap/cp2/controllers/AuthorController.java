@@ -8,6 +8,7 @@ import com.fiap.cp2.services.AuthorService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -42,5 +43,17 @@ public class AuthorController {
     public ResponseEntity<AuthorOutDto> findById(@PathVariable Long id) {
         final Author author = this.authorService.findById(id);
         return ResponseEntity.ok(AuthorMapper.toOutDto(author));
+    }
+
+    @PutMapping
+    public ResponseEntity<AuthorOutDto> update(@Validated @RequestBody AuthorInDto authorInDto) {
+        final Author author = this.authorService.saveOrUpdate(AuthorMapper.toEntity(authorInDto));
+        return ResponseEntity.ok(AuthorMapper.toOutDto(author));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        this.authorService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
