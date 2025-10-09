@@ -18,6 +18,16 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
-    private Author authorId;
+    private Author author;
 
+    public Book(String title, String isbn, Long authorId) {
+        this.title = title;
+        this.isbn = isbn;
+        this.author = new Author();
+        this.author.setId(authorId);
+    }
+
+    public Book() {
+
+    }
 }
