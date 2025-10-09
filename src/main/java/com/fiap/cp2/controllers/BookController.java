@@ -2,6 +2,7 @@ package com.fiap.cp2.controllers;
 
 import com.fiap.cp2.dto.BookInDto;
 import com.fiap.cp2.dto.BookOutDto;
+import com.fiap.cp2.entities.Author;
 import com.fiap.cp2.entities.Book;
 import com.fiap.cp2.mappers.BookMapper;
 import com.fiap.cp2.services.BookService;
@@ -47,7 +48,7 @@ public class BookController {
     }
 
     @PutMapping
-    public ResponseEntity<BookOutDto> createBook(@RequestBody BookInDto book) {
+    public ResponseEntity<BookOutDto> updateBook(@RequestBody BookInDto book) {
         final Book savedBook = this.bookService.saveOrUpdate(BookMapper.toEntity(book));
         return ResponseEntity.ok(BookMapper.toOutDto(savedBook));
     }
