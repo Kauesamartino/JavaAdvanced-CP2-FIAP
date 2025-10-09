@@ -19,4 +19,9 @@ public class AuthorServiceImpl implements AuthorService {
     public Page<Author> findAll(Pageable pageable) {
         return this.authorRepository.findAll(pageable);
     }
+
+    @Override
+    public Author saveOrUpdate(Author author) {
+        return this.authorRepository.save(author);
+    }
 }
