@@ -47,8 +47,8 @@ public class AuthorRestController {
     }
 
     @PutMapping("/{id}")
-    public  ResponseEntity<AuthorOutDto> updateAuthor(@PathVariable Long id, @RequestBody AuthorInDto authorInDto){
-        final AuthorOutDto dto = authorController.updateAuthor(id, authorInDto);
+    public  ResponseEntity<AuthorOutDto> updateAuthor(@RequestBody AuthorInDto authorInDto){
+        final AuthorOutDto dto = authorController.updateAuthor(authorInDto);
         return ResponseEntity.ok(dto);
     }
 
