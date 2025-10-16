@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    Page<Author> findALl(Pageable pageable);
+    Page<Author> findAll(Pageable pageable);
 
 }
